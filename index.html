@@ -80,16 +80,6 @@
       const reason = e.target.reason.value;
       const client = clientCode;
 
-      // === Save to Google Sheets backend (optional) ===
-      // fetch("https://script.google.com/a/macros/leadworksusa.com/s/AKfycbx7El98P4qkAD5JnoLk-GWFuD2anFOobRb04Htc4-HJupidWdNTymaYxQ6OEPX2TkGP/exec", {
-      //   method: "POST",
-      //   body: JSON.stringify({ email, reason, client })
-      // });
+      // Save to Google Sheets backend
+      fetch("https://script.google.com/a/macros/le
 
-      // Show goodbye message
-      document.getElementById("message").innerText = "Sorry to see you go!";
-      e.target.style.display = "none"; // Hide form
-    });
-  </script>
-</body>
-</html>
