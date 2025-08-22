@@ -59,7 +59,6 @@
     <form id="unsubscribeForm">
       <input type="email" name="email" placeholder="Enter your email" required>
       <textarea name="reason" placeholder="Reason for unsubscribing"></textarea>
-      <!-- Hidden client code -->
       <input type="hidden" id="client" name="client">
       <button type="submit">Unsubscribe</button>
     </form>
@@ -80,6 +79,23 @@
       const reason = e.target.reason.value;
       const client = clientCode;
 
-      // Save to Google Sheets backend
-      fetch("https://script.google.com/a/macros/le
+      // Send to Google Sheets backend
+      fetch("https://script.google.com/a/macros/leadworksusa.com/s/AKfycbzAibBMRohA_iTBiGa7i1GQKsw2hnI1riVRVruSh8gQcSekYZZTuleJSsVhk03dz5Qk/exec", {
+        method: "POST",
+        body: new URLSearchParams({
+          email: email,
+          reason: reason,
+          client: client
+        })
+      }).then(() => {
+        document.getElementById("message").innerText = "Sorry to see you go!";
+        e.target.style.display = "none"; // Hide form after submit
+      }).catch(() => {
+        document.getElementById("message").innerText = "Error submitting. Please try again.";
+      });
+    });
+  </script>
+</body>
+</html>
+
 
