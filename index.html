@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unsubscribe</title>
+  <style>
+    body {
+      background: #f4f6f9;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 320px;
+    }
+    h2 {
+      color: #d9534f;
+    }
+    input, button {
+      width: 90%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    button {
+      background: #d9534f;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    button:hover {
+      background: #c9302c;
+    }
+    #message {
+      margin-top: 20px;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Unsubscribe</h2>
+    <form id="unsubscribeForm">
+      <input type="email" name="email" placeholder="Enter your email" required>
+      <input type="text" id="client" name="client" readonly>
+      <button type="submit">Unsubscribe</button>
+    </form>
+    <p id="message"></p>
+  </div>
+
+  <script>
+    // auto-fill client from URL (?c=123)
+    const params = new URLSearchParams(window.location.search);
+    const clientCode = params.get("c") || "Unknown";
+    document.getElementById("client").value = "Client Code: " + clientCode;
+
+    // handle form submit
+    document.getElementById("unsubscribeForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // Collect data
+      const email = e.target.email.value;
+      const client = clientCode;
+
+      // === send to Google Sheets via Apps Script (optional) ===
+      // fetch("YOUR_GOOGLE_SCRIPT_URL", {
+      //   method: "POST",
+      //   body: JSON.stringify({ email, client })
+      // });
+
+      // Show message
+      document.getElementById("message").innerText = "Sorry to see you go!";
+      e.target.style.display = "none"; // hide form after submit
+    });
+  </script>
+</body>
+</html>
